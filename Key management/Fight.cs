@@ -6,7 +6,7 @@ using System.Threading.Tasks.Dataflow;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-Public class zmienne
+class Fight
 {
 
     int fight = 0;
@@ -15,9 +15,9 @@ Public class zmienne
     int Fire = FireSkill;
     int Ground = GroundSkill;
     int Magic = 0;
-}
 
-Function Update()
+
+    void Update()
     {
         if((AirSkill <= 1) && (WaterSkill <= 1) && (FireSkill <= 1) && (GroundSkill <= 1))
         {
@@ -209,3 +209,4 @@ Function Update()
             }
         }
     }
+}
