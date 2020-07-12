@@ -5,10 +5,12 @@ using System.Threading.Tasks.Dataflow;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
+Private int fight = 0;
+
 // Start Position
 Function Start()
 {
-    transform.position = (1,1,1)
+    Return0;
 }
 
 // Keys Management
@@ -23,59 +25,91 @@ Function Update()
     // fight
     if(inputt.GetKey("Space"))
     {
-        PlayAnimation = ("WeaponExtended");
 
-        if(Inputt.GetKey("Control"))
+        fight =+ 1;
+        
+        if(fight == 1)
         {
-            // Basis attacks
-            if(inputt.GetKey("W"))
-            {
-                if(Weapon.Vector == Vector)
-                {
-                    PlayAnimation = ("FailedFrontAttack");
-                    PLay = ("MetalSound");
-                }
-                else
-                {
-                    PlayAnimation = ("FrontalAttack");
-                    Transform.translate(Vector3.ahead * 5);
-                }
-            }
-
-            if(inputt.GetKey("a"))
-            {
-                if(Weapon.Vector == Vector)
-                {
-                    PlayAnimation = ("FailedLeftAttack");
-                    PLay = ("MetalSound");
-                }
-                else
-                {
-                    PlayAnimation = ("LeftAttack");
-                }
-            }
-
-            if(inputt.GetKey("d"))
-            {
-                if(Weapon.Vector == Vector)
-                {
-                    PlayAnimation = ("FailedRightAttack");
-                    PLay = ("MetalSound");
-                }
-                else
-                {
-                    PlayAnimation = ("RightAttack");
-                }
-            }
-            if(Inputt.GetKey("s"))
-            {
-                PlayAnimation = ("Dodge");
-                transform.translate(BitVector32.back * 5);
-            }
-
+            PlayAnimation = ("WeaponExtended");
         }
         else
         {
+            fight =+ 1;
+        }
+
+        if(fight == 2)
+        {
+            fight =- 2;
+        }
+        else
+        {
+            
+        }
+
+        if(fight == 1)
+        {
+            if(Inputt.GetKey("Control"))
+            {
+                // Basis attacks
+                if(inputt.GetKey("W"))
+                {
+                    if(Weapon.Vector == Vector)
+                    {
+                        PlayAnimation = ("FailedFrontAttack");
+                        Play = ("MetalSound");
+                    }
+                    else
+                    {
+                        PlayAnimation = ("FrontalAttack");
+                        Transform.translate(Vector3.ahead * 5);
+                    }
+                }
+
+                if(inputt.GetKey("a"))
+                {
+                    if(Weapon.Vector == Vector)
+                    {
+                        PlayAnimation = ("FailedLeftAttack");
+                        Play = ("MetalSound");
+                    }
+                    else
+                    {
+                        PlayAnimation = ("LeftAttack");
+                    }
+                }
+
+                if(inputt.GetKey("d"))
+                {
+                    if(Weapon.Vector == Vector)
+                    {
+                        PlayAnimation = ("FailedRightAttack");
+                        Play = ("MetalSound");
+                    }
+                    else
+                    {
+                        PlayAnimation = ("RightAttack");
+                    }
+                }
+                if(Inputt.GetKey("s"))
+                {
+                    PlayAnimation = ("Dodge");
+                    transform.translate(BitVector32.back * 5);
+                }
+            }
+            else
+            {
+
+                //Block
+                if(inputt.GetKey("Shift"))
+                {
+                    PlayAnimation = ("Block");
+                    Player.Def = 1000000000000;
+                }
+            }
+        }
+        else
+        {
+
             // Character Movement in combat
             if(inputt.GetKey("w"))
             {
