@@ -10,7 +10,7 @@ class OtherKeys
 {
     int CanvasPoint = 0;
 
-    Function Update()
+    void Update()
     {
         if(inputt.GetKey("Escape"))
         {

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Specialized;
@@ -7,17 +9,17 @@ using System.Threading.Tasks.Dataflow;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-class CameraControl
+[RequestComponent(typeof(NewMeshAgent))]
+class PlayerMotor
 {
-
-    Camera cam;
+    NewMeshAgent agent;
     void start()
     {
-        cam = Camera.main;
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    public void MoveToPoint (Vector3 point)
     {
-        if()
+        agent.setDestination(point);
     }
 }

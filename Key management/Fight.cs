@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 class Fight
 {
+    Camera cam;
+    PlayerMotor motor;
 
     int fight = 0;
     int Air = AirSkill;
