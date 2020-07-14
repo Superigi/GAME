@@ -1,3 +1,4 @@
+using System.IO.Enumeration;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.CompilerServices;
@@ -18,8 +19,39 @@ class PlayerMotor
         agent = GetComponent<NavMeshAgent>();
     }
 
+    void Update()
+    {
+        if(target != null)
+        {
+            agent.setDestination(target.position);
+            FaceTraget();
+        }
+    }
+
     public void MoveToPoint (Vector3 point)
     {
         agent.setDestination(point);
+    }
+
+    public void FollowTarger(Interactable newTarget) 
+    {
+        agent.StoppingDistance = newTarget.radius * .8f;
+
+        target = newTarget.transform;
+    }
+
+    public void StopFollowingTarget()
+    {
+        agent.StoppingDistance = 0f;
+        agent.updateRotation = true;
+        
+        target = null;
+    }
+
+    void FaceTraget()
+    {
+        Vector3 direction = (FaceTraget.position - FindTransform.position).normalized;
+        Quaternion lookRotation = Quaternion.lookRotation(new Vector32(direction.x, 0f.direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Timeout.deltaTime * 5f);
     }
 }

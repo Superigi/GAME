@@ -1,3 +1,4 @@
+using System.Net;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Runtime.ExceptionServices;
@@ -9,6 +10,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 [RequestComponent(typeof(PlayerMotor))]
 class Movement
 {    
+
+    public Interactable focus;
 
     void start()
     {
@@ -25,7 +28,13 @@ class Movement
             PlayAnimation = ("Walking");
             if(Psysics.Raycast(ray, out hit, 100, MovementMask))
             {
-                motor.MoveToPoint(hit.point);
+                Interactable Interactable = hit.colider.GetComponent<Interactable>();
+                if(interactable != null)
+                {
+                    SetFocus(interactable);
+                }
+
+                RemoveFocus();
             }
         }
         
@@ -36,7 +45,13 @@ class Movement
             PlayAnimation = ("Walking");
             if(Psysics.Raycast(ray, out hit, 100, MovementMask))
             {
-                motor.MoveToPoint(hit.point);
+                Interactable Interactable = hit.colider.GetComponent<Interactable>();
+                if(interactable != null)
+                {
+                    SetFocus(interactable);
+                }
+
+                RemoveFocus();
             }
         }
     
@@ -47,7 +62,13 @@ class Movement
             PlayAnimation = ("Walking");
             if(Psysics.Raycast(ray, out hit, 100, MovementMask))
             {
-                motor.MoveToPoint(hit.point);
+                Interactable Interactable = hit.colider.GetComponent<Interactable>();
+                if(interactable != null)
+                {
+                    SetFocus(interactable);
+                }
+
+                RemoveFocus();
             }
         }
         
@@ -58,8 +79,37 @@ class Movement
             PlayAnimation = ("Walking");
             if(Psysics.Raycast(ray, out hit, 100, MovementMask))
             {
-                motor.MoveToPoint(hit.point);
+                Interactable Interactable = hit.colider.GetComponent<Interactable>();
+                if(interactable != null)
+                {
+                    SetFocus(interactable);
+                }
             }
         }
+    }
+
+    void SetFocus (Interactable newFocus)
+    {
+        if(newFocus != focus)
+        {
+            if(focus != null)
+            {
+                focus.OnDefocused();
+            }        
+            Focus = newfocus;
+            motor.FollowTarget(newFocus);
+        }
+
+        newFocus.OnFocused(transform);
+    }
+
+    void RemoveFocus()
+    {
+        if(focus != null)
+        {
+            focus.OnDefocused(); 
+        }
+        focus = null;
+        mator.StopFollowingTarget();
     }
 }
