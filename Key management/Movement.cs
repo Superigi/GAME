@@ -19,6 +19,7 @@ class Movement
         motor = GetComponent<PlayerMotor>();
     }
 
+    // Normal moving
     void Update()
     {
         if(inputt.GetKey("w"))
@@ -88,6 +89,7 @@ class Movement
         }
     }
 
+    // Focus on items
     void SetFocus (Interactable newFocus)
     {
         if(newFocus != focus)
@@ -103,6 +105,7 @@ class Movement
         newFocus.OnFocused(transform);
     }
 
+    // Remove focus
     void RemoveFocus()
     {
         if(focus != null)

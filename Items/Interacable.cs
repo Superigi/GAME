@@ -1,8 +1,7 @@
-
 using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks.Dataflow;
-class Interacable
+public class Interacable
 {
     public float radius = 3f;
     public transform interactionTransform;
@@ -12,11 +11,13 @@ class Interacable
 
     bool hasInteracted = false;
 
+    // Debug Log
     public virtual void Interact()
     {
         Debug.Log("Interact with" + transform.name);
     }
 
+    //Interacn on item
     void update()
     {
         if(isFocus && !hasInteracted)
@@ -30,6 +31,7 @@ class Interacable
         }
     }
 
+    // Focus on item
     public void OnFocused (Transform playerTransform)
     {
         isFocus focus = true;
@@ -37,15 +39,22 @@ class Interacable
         hasInteracted = false;
     }
 
+    // Defocus on item
     public void OnDefocuset ()
     {
         isFocus = false;
         Player = null;
         hasInteracted = false;
     }
-
+    
+    // Drawing color on the edges of items
     void OnDrawGizmosSelected()
     {
+        if(interactionTransform == null)
+        {
+            interactionTransform = transform;
+        }
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }

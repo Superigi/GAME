@@ -10,6 +10,7 @@ class HealthPoints
         MaxHealth = CurrentHealth;
     }
 
+    //Demage
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))

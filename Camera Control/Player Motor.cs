@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [RequestComponent(typeof(NewMeshAgent))]
+
 class PlayerMotor
 {
     NewMeshAgent agent;
@@ -25,14 +26,21 @@ class PlayerMotor
         {
             agent.setDestination(target.position);
             FaceTraget();
+
+            if(EventSustem.current.IsPonterOverGameObject())
+            {
+                 return;
+            }
         }
     }
 
+    // Moving to item
     public void MoveToPoint (Vector3 point)
     {
         agent.setDestination(point);
     }
 
+    // Following to item
     public void FollowTarger(Interactable newTarget) 
     {
         agent.StoppingDistance = newTarget.radius * .8f;
@@ -40,6 +48,7 @@ class PlayerMotor
         target = newTarget.transform;
     }
 
+    // Blockking on items
     public void StopFollowingTarget()
     {
         agent.StoppingDistance = 0f;
@@ -48,6 +57,7 @@ class PlayerMotor
         target = null;
     }
 
+    // Turn to item
     void FaceTraget()
     {
         Vector3 direction = (FaceTraget.position - FindTransform.position).normalized;
